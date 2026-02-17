@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>për dashurinë time ❥ surprizë</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #ffe0e7 0%, #fbc1d1 50%, #ffd9e8 100%);
+      font-family: 'Segoe UI', 'Quicksand', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* zemra fluturuese në background */
+    .heart-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .heart-bg i {
+      position: absolute;
+      color: rgba(230, 80, 130, 0.25);
+      font-size: 2.2rem;
+      animation: fluturo 14s infinite linear;
+      user-select: none;
+    }
+
+    @keyframes fluturo {
+      0% { transform: translateY(100vh) rotate(0deg) scale(0.6); opacity: 0.5; }
+      100% { transform: translateY(-10vh) rotate(25deg) scale(1.4); opacity: 0; }
+    }
+
+    /* kartela kryesore */
+    .surpriza-karta {
+      background: rgba(255, 245, 250, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 4rem 1.8rem 4rem 1.8rem;
+      box-shadow: 0 30px 50px rgba(220, 80, 130, 0.35),
+                  0 10px 30px rgba(0, 0, 0, 0.1),
+                  inset 0 2px 10px #fff0f5;
+      max-width: 1100px;
+      width: 100%;
+      padding: 2.5rem 2rem;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      position: relative;
+      z-index: 10;
+      animation: shkelqim 4s infinite alternate;
+    }
+
+    @keyframes shkelqim {
+      0% { box-shadow: 0 20px 40px #fbb0c0, 0 0 0 3px #ffe2ed; }
+      100% { box-shadow: 0 30px 60px #ff99bb, 0 0 0 6px #ffffffd0; }
+    }
+
+    /* tituj */
+    .titulli {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .titulli h1 {
+      font-size: 3.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #bc2e5c, #d44c78, #f28eb0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 4px 4px 20px #ffb8cf;
+      letter-spacing: -0.5px;
+      animation: kercim 0.9s ease;
+    }
+
+    .titulli p {
+      font-size: 2rem;
+      color: #aa2e58;
+      background: rgba(255, 255, 255, 0.6);
+      display: inline-block;
+      padding: 0.4rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 500;
+      box-shadow: 0 6px 12px #ffb0c3;
+      animation: rrëshqitje 1.2s;
+    }
+
+    @keyframes kercim {
+      0% { opacity: 0; transform: scale(0.2) rotate(-8deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0); }
+    }
+
+    @keyframes rrëshqitje {
+      0% { opacity: 0; transform: translateY(50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* GALERIA E FOTOVE – vëndo fotot e tua këtu */
+    .galeria {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      justify-content: center;
+      margin: 3rem 0 2rem;
+    }
+
+    .foto-item {
+      flex: 1 1 200px;
+      max-width: 240px;
+      border-radius: 35px 12px 35px 12px;
+      overflow: hidden;
+      box-shadow: 12px 14px 25px #de8ca8, -8px -8px 15px #fffbfd, inset 0 0 0 2px white;
+      transform: rotate(0deg);
+      transition: 0.4s cubic-bezier(0.2, 1.2, 0.8, 1.2);
+      background: #fee;
+      cursor: pointer;
+      animation: lëvizje 6s infinite alternate;
+    }
+
+    .foto-item:nth-child(odd) { transform: rotate(-2deg); }
+    .foto-item:nth-child(even) { transform: rotate(3deg) translateY(8px); }
+    .foto-item:nth-child(3) { transform: rotate(4.5deg) translateY(-6px); }
+
+    @keyframes lëvizje {
+      0% { transform: translateY(0px) rotate(var(--rot, 1deg)); }
+      100% { transform: translateY(-14px) rotate(var(--rot, -1.5deg)); }
+    }
+
+    .foto-item img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s, filter 0.4s;
+      border-radius: inherit;
+    }
+
+    .foto-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, #b32e5acc, transparent);
+      color: white;
+      padding: 1.5rem 0.5rem 0.6rem;
+      font-weight: 600;
+      font-size: 1.2rem;
+      text-align: center;
+      backdrop-filter: blur(3px);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: 0.3s;
+    }
+
+    .foto-item:hover .foto-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .foto-item:hover img {
+      transform: scale(1.1);
+      filter: brightness(1.1) saturate(1.2);
+    }
+
+    .foto-item:hover {
+      box-shadow: 20px 22px 35px #e87b9f, -12px -10px 22px #fff;
+    }
+
+    /* butoni i dashurisë */
+    .seksion-dashuri {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      margin: 2.8rem 0 1.5rem;
+    }
+
+    .dashuri-btn {
+      background: linear-gradient(145deg, #ff88b2, #ff4f88);
+      border: none;
+      border-radius: 80px;
+      padding: 1.3rem 3.5rem;
+      font-size: 2.4rem;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 3px 6px #a52d55;
+      box-shadow: 0 18px 30px #ff80aa, 0 6px 12px #ffeef4 inset;
+      cursor: pointer;
+      transition: 0.25s;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .dashuri-btn i {
+      font-size: 2.8rem;
+      animation: rrahje 1.4s infinite;
+    }
+
+    @keyframes rrahje {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.3); color: #fff3f7; }
+      50% { transform: scale(1.1); }
+      75% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .dashuri-btn:hover {
+      background: linear-gradient(145deg, #ff70a0, #ff3675);
+      transform: scale(1.07) translateY(-6px);
+      box-shadow: 0 28px 40px #ff6796;
+    }
+
+    .numeruesi {
+      font-size: 2.3rem;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      padding: 0.7rem 2.2rem;
+      border-radius: 60px;
+      color: #ba2d60;
+      font-weight: 600;
+      border: 4px dashed #ff9ebe;
+    }
+
+    .mesazhi-sekret {
+      background: #fff2f7ee;
+      backdrop-filter: blur(14px);
+      padding: 1.8rem 2.2rem;
+      border-radius: 60px 18px 60px 18px;
+      font-size: 2rem;
+      color: #b82b62;
+      text-align: center;
+      border: 3px solid white;
+      margin: 2rem 0 1rem;
+      font-weight: 500;
+      box-shadow: 0 14px 28px #ffb0c7;
+      transition: 0.4s;
+    }
+
+    .nenshkrimi {
+      text-align: right;
+      font-size: 2rem;
+      margin-top: 2rem;
+      color: #b34571;
+      font-style: italic;
+      border-top: 4px wavy #ffb8cf;
+      padding-top: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- sfond me zemra lëvizëse -->
+  <div class="heart-bg" id="heartBg"></div>
+
+  <main class="surpriza-karta">
+    <div class="titulli">
+      <h1>💖 për Tukulukin tem 💖</h1>
+      <p>Ma e mira je</p>
+    </div>
+
+    <!-- 
+      ⭐ FOTOT E TUA – vëndo këtu imazhet nga kompjuteri yt 
+      1. Vendos fotot në të njëjtën dosje me këtë faqe HTML 
+      2. Zëvendëso emrat "foto1.jpg", "foto2.jpg" me emrat e tu 
+      (mund të shtosh edhe më shumë duke kopjuar bllokun div)
+    -->
+    <div class="galeria" id="photoGallery">
+      <!-- fotografia 1 -->
+      <div class="foto-item">
+        <img src="IMG_2115.jpeg" alt="foto jonë 1">
+        <div class="foto-caption">✨ Tdu ✨</div>
+      </div>
+      <!-- fotografia 2 -->
+      <div class="foto-item">
+        <img src="IMG_2496.jpeg" alt="foto jonë 2">
+        <div class="foto-caption">🌅 Tdu 🌅</div>
+      </div>
+      <!-- fotografia 3 -->
+      <div class="foto-item">
+        <img src="IMG_2628.jpeg" alt="foto jonë 3">
+        <div class="foto-caption">🍃 Tdu 🍃</div>
+      </div>
+      <!-- fotografia 4 -->
+      <div class="foto-item">
+        <img src="IMG_2642.jpeg" alt="foto jonë 4">
+        <div class="foto-caption">💫 Tdu 💫</div>
+      </div>
+      <!-- fotografia 5 (shto sa të duash) -->
+      <div class="foto-item">
+        <img src="IMG_2771.jpeg" alt="foto jonë 5">
+        <div class="foto-caption">🌸 Tdu 🌸</div>
+      </div>
+    </div>
+
+    <!-- butoni & numeruesi -->
+    <div class="seksion-dashuri">
+      <button class="dashuri-btn" id="loveBtn"><i class="fas fa-heart"></i> Truse njo 7 her jet <i class="fas fa-heart"></i></button>
+      <span class="numeruesi" id="clickCounter">0 💗</span>
+    </div>
+
+    <!-- mesazhi që ndryshon -->
+    <div id="secretMessage" class="mesazhi-sekret">
+      <i class="fas fa-heart"></i> Tkom jet <i class="fas fa-heart"></i>
+    </div>
+
+    <div class="nenshkrimi">
+    <span>Veq i jotii o vllaaa ✨</span>
+    </div>
+  </main>
+
+  <script>
+    (function() {
+      // ----- shtoj zemra fluturuese shtesë -----
+      const heartContainer = document.getElementById('heartBg');
+      const zemrat = ['❤️', '🧡', '💖', '💗', '💘', '💝', '♥️', '💕'];
+      for (let i = 0; i < 36; i++) {
+        const zemër = document.createElement('i');
+        zemër.textContent = zemrat[Math.floor(Math.random() * zemrat.length)];
+        const madhësia = Math.floor(Math.random() * 30 + 14) + 'px';
+        const majtas = Math.random() * 100 + '%';
+        const vonesë = Math.random() * 12 + 's';
+        const kohëzgjatja = Math.floor(Math.random() * 12 + 12) + 's';
+        zemër.style.fontSize = madhësia;
+        zemër.style.left = majtas;
+        zemër.style.animationDelay = vonesë;
+        zemër.style.animationDuration = kohëzgjatja;
+        zemër.style.opacity = Math.random() * 0.3 + 0.2;
+        zemër.style.color = `rgba(240, ${Math.floor(100+Math.random()*90)}, 170, 0.5)`;
+        heartContainer.appendChild(zemër);
+      }
+
+      // ----- logjika e klikimeve dhe mesazheve -----
+      const btnDashuri = document.getElementById('loveBtn');
+      const counterSpan = document.getElementById('clickCounter');
+      const msgBox = document.getElementById('secretMessage');
+      let klikime = 0;
+
+      // mesazhe romantike në shqip
+      const mesazhet = [
+        "💞 Mfaal tdu shumm 💞",
+        "🌸 tkom gjithqkaa 🌸",
+        "✨ ta du ftyren ✨",
+        "🌙 tkom zemrush 🌙",
+        "🍃 tpuqi shummm 🍃",
+        "💫 shyqyr qe tkom 💫",
+        "💘 gjith kom met dasht💘",
+        "🥰 o shook tdu 🥰"
+      ];
+
+      function përditësoMesazhin() {
+        counterSpan.textContent = klikime + ' 💗';
+
+        if (klikime >= 6) {
+          const rastësor = Math.floor(Math.random() * mesazhet.length);
+          msgBox.innerHTML = `<i class="fas fa-heart"></i> ${mesazhet[rastësor]} <i class="fas fa-heart"></i>`;
+          // efekt ekstra për fotot
+          document.querySelectorAll('.foto-item').forEach(el => {
+            el.style.transition = '0.5s';
+            el.style.boxShadow = '0 0 0 6px #ffe6f0, 0 30px 45px #ffb0c7';
+            setTimeout(() => {
+              el.style.boxShadow = '12px 14px 25px #de8ca8, -8px -8px 15px #fffbfd, inset 0 0 0 2px white';
+            }, 600);
+          });
+        } else if (klikime >= 3) {
+          msgBox.innerHTML = `<i class="fas fa-heart"></i> ${mesazhet[1]} <i class="fas fa-heart"></i>`;
+        } else if (klikime >= 1) {
+          msgBox.innerHTML = `<i class="fas fa-heart"></i> je ma e rendishmja per muu 🥹 <i class="fas fa-heart"></i>`;
+        } else {
+          msgBox.innerHTML = `<i class="fas fa-heart"></i> mfal per kejtaa tdu <i class="fas fa-heart"></i>`;
+        }
+      }
+
+      btnDashuri.addEventListener('click', function(e) {
+        klikime++;
+        përditësoMesazhin();
+
+        // efekt zemra që dalin nga butoni
+        for (let i=0; i<7; i++) {
+          const zemërFluturuese = document.createElement('span');
+          zemërFluturuese.textContent = ['💖','💗','💓','💞','❤️'][Math.floor(Math.random()*5)];
+          zemërFluturuese.style.position = 'absolute';
+          zemërFluturuese.style.fontSize = (Math.random()*30+25)+'px';
+          zemërFluturuese.style.left = (e.clientX - 25 + Math.random()*40) + 'px';
+          zemërFluturuese.style.top = (e.clientY - 20 + Math.random()*30) + 'px';
+          zemërFluturuese.style.pointerEvents = 'none';
+          zemërFluturuese.style.zIndex = '9999';
+          zemërFluturuese.style.transition = 'all 1.8s ease-out';
+          zemërFluturuese.style.opacity = '1';
+          document.body.appendChild(zemërFluturuese);
+
+          setTimeout(() => {
+            zemërFluturuese.style.transform = `translate(${Math.random()*200-100}px, -200px) scale(2)`;
+            zemërFluturuese.style.opacity = '0';
+          }, 10);
+          setTimeout(() => {
+            if (zemërFluturuese.parentNode) document.body.removeChild(zemërFluturuese);
+          }, 1700);
+        }
+      });
+
+      // edhe klikimi mbi foto shton klikime
+      const fotot = document.querySelectorAll('.foto-item');
+      fotot.forEach(foto => {
+        foto.addEventListener('click', function() {
+          klikime++;
+          counterSpan.textContent = klikime + ' 💗';
+          përditësoMesazhin();
+
+          this.style.transform = 'scale(1.08) rotate(1deg)';
+          setTimeout(() => {
+            this.style.transform = '';
+          }, 250);
+        });
+      });
+
+      përditësoMesazhin(); // inicializim
+
+      // efekt gradient që lëviz me miun (argëtues)
+      document.body.addEventListener('mousemove', function(e) {
+        const x = (e.clientX / window.innerWidth) * 25;
+        const y = (e.clientY / window.innerHeight) * 20;
+        document.body.style.background = `linear-gradient(${x+130}deg, #ffe0e7 0%, #fbc1d1 ${45+y}%, #ffd9e8 100%)`;
+      });
+
+    })();
+  </script>
+
+  <!-- UDHËZIME:
+    1. Ruaje këtë kod si "surprize.html" (ose çfarëdo emri).
+    2. Vendosi fotot e tua (foto1.jpg, foto2.jpg, foto3.jpg, foto4.jpg, foto5.jpg) në të njëjtën dosje.
+    3. Nëse fotot e tua kanë emra të tjerë, ndërro te pjesa <img src="foto1.jpg"> me emrin e saktë.
+    4. Hape me çdo shfletues (Chrome, Firefox, Edge).
+    5. Shijo surprizën! ❤️
+  -->
+</body>
+</html>
